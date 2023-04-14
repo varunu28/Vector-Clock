@@ -10,10 +10,13 @@ public class DatabaseServer implements Runnable {
 
     private final MessageQueue messageQueue;
 
+    private final Database database;
+
     public DatabaseServer(int processId, int totalProcessCount, MessageQueue messageQueue) {
         this.processId = processId;
         this.totalProcessCount = totalProcessCount;
         this.messageQueue = messageQueue;
+        this.database = new Database(processId, totalProcessCount, messageQueue);
     }
 
     @SuppressWarnings("InfiniteLoopStatement")

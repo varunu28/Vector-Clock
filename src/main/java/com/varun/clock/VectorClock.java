@@ -4,16 +4,18 @@ import java.util.Arrays;
 
 public class VectorClock {
 
-    private final int totalProcessCount;
+    private int totalProcessCount;
 
-    private final int[] clock;
+    private int[] clock;
+
+    public VectorClock() {}
 
     public VectorClock(int totalProcessCount) {
         this.totalProcessCount = totalProcessCount;
         this.clock = new int[totalProcessCount];
     }
 
-    public VectorClock(int totalProcessCount, final int[] clock) {
+    public VectorClock(int totalProcessCount, int[] clock) {
         this.totalProcessCount = totalProcessCount;
         this.clock = clock;
     }
