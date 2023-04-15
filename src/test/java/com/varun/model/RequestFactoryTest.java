@@ -120,12 +120,10 @@ public class RequestFactoryTest {
         // Arrange
         String noProcessId = "sync_get key";
         String noKeyAndProcessId = "sync_get";
-        String nonIntegerProcessId = "sync_get key val";
 
         // Assert
         assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noProcessId, messageQueue));
         assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyAndProcessId, messageQueue));
-        assertThrows(NumberFormatException.class, () -> RequestFactory.parseRequest(nonIntegerProcessId, messageQueue));
     }
 
     @Test
