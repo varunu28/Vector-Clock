@@ -19,7 +19,10 @@ public class MessageQueue {
         this.processQueue.get(processId).add(message);
     }
 
-    public String getMessage(int processId) throws InterruptedException {
+    public String getMessage(int processId) throws Exception {
+        if (!this.processQueue.containsKey(processId)) {
+            throw new Exception(String.format("Message queue does not contain processId: %d", processId));
+        }
         return this.processQueue.get(processId).take();
     }
 }

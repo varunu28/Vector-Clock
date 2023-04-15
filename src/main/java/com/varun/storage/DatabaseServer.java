@@ -1,7 +1,5 @@
 package com.varun.storage;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.varun.exception.InvalidRequestException;
 import com.varun.model.DatabaseRequest;
 import com.varun.model.RequestFactory;
 import com.varun.util.MessageQueue;
@@ -30,7 +28,7 @@ public class DatabaseServer implements Runnable {
                 System.out.printf("Received message: %s on process: %d \n", message, this.processId);
                 DatabaseRequest request = RequestFactory.parseRequest(message, messageQueue);
                 request.process(database);
-            } catch (InterruptedException | InvalidRequestException | JsonProcessingException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }

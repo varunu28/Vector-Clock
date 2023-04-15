@@ -5,7 +5,6 @@ import com.varun.clock.ClockValue;
 import com.varun.clock.VectorClock;
 import com.varun.util.MessageQueue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,28 +63,9 @@ public class Database {
             System.out.println("Thread interrupted: " + e.getMessage());
         }
 
-        printResponse(this.getResponseConditionUtil.getResponseCondition(key).getClockValues(), key);
-    }
-
-    private void printResponse(List<ClockValue> clockValues, String key) {
-        List<ClockValue> highestClockValues = new ArrayList<>();
-        for (ClockValue clockValue : clockValues) {
-            if (clockValue != null) {
-                if (highestClockValues.isEmpty()) {
-                    highestClockValues.add(clockValue);
-                } else {
-                    VectorClock currVectorClock = clockValue.vectorClock();
-                    VectorClock highestVectorClock = highestClockValues.get(0).vectorClock();
-                    if (currVectorClock.isConcurrent(highestVectorClock) ||
-                            currVectorClock.equals(highestVectorClock)) {
-                        highestClockValues.add(clockValue);
-                    } else {
-                        highestClockValues.clear();
-                        highestClockValues.add(clockValue);
-                    }
-                }
-            }
-        }
+        // Calculate the highest clocks
+        List<ClockValue> highestClockValues = ClockValue.findHighestClocks(
+                this.getResponseConditionUtil.getResponseCondition(key).getClockValues());
         if (highestClockValues.isEmpty()) {
             System.out.println("No value found for key: " + key);
         } else {

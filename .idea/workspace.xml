@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Clock running correctly. Tests to be added" />
+    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Fixed failing test">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/varun/clock/ClockTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/varun/util/MessageQueueTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/clock/ClockValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/clock/ClockValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/DatabaseServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/DatabaseServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/util/MessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/util/MessageQueue.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,12 +55,13 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.varun.util" />
       <recent name="com.varun.model" />
       <recent name="com.varun.clock" />
       <recent name="com.varun" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.java in vclock">
+  <component name="RunManager" selected="JUnit.ClockTest">
     <configuration name="Runner" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.varun.Runner" />
       <module name="vclock" />
@@ -67,84 +76,92 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RequestFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.varun.model.*" />
+          <option name="PATTERN" value="com.varun.clock.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.varun.model" />
-      <option name="MAIN_CLASS_NAME" value="com.varun.model.RequestFactoryTest" />
+      <option name="PACKAGE_NAME" value="com.varun.clock" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.clock.ClockTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RequestFactoryTest.syncGetResponseParse_exception" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClockTest.clockSerialization_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.varun.model.*" />
+          <option name="PATTERN" value="com.varun.clock.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.varun.model" />
-      <option name="MAIN_CLASS_NAME" value="com.varun.model.RequestFactoryTest" />
-      <option name="METHOD_NAME" value="syncGetResponseParse_exception" />
+      <option name="PACKAGE_NAME" value="com.varun.clock" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.clock.ClockTest" />
+      <option name="METHOD_NAME" value="clockSerialization_success" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RequestFactoryTest.syncGetResponseParse_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClockTest.highestClockWithConcurrent_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.varun.model.*" />
+          <option name="PATTERN" value="com.varun.clock.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.varun.model" />
-      <option name="MAIN_CLASS_NAME" value="com.varun.model.RequestFactoryTest" />
-      <option name="METHOD_NAME" value="syncGetResponseParse_success" />
+      <option name="PACKAGE_NAME" value="com.varun.clock" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.clock.ClockTest" />
+      <option name="METHOD_NAME" value="highestClockWithConcurrent_success" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RequestFactoryTest.syncSetRequestParse_exception" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClockTest.highestClockWithEqualClocks_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.varun.model.*" />
+          <option name="PATTERN" value="com.varun.clock.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.varun.model" />
-      <option name="MAIN_CLASS_NAME" value="com.varun.model.RequestFactoryTest" />
-      <option name="METHOD_NAME" value="syncSetRequestParse_exception" />
+      <option name="PACKAGE_NAME" value="com.varun.clock" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.clock.ClockTest" />
+      <option name="METHOD_NAME" value="highestClockWithEqualClocks_success" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="java in vclock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClockTest.highestClock_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.varun.clock.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.varun.clock" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.clock.ClockTest" />
+      <option name="METHOD_NAME" value="highestClock_success" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.java in vclock" />
-        <item itemvalue="JUnit.RequestFactoryTest" />
-        <item itemvalue="JUnit.RequestFactoryTest.syncGetResponseParse_exception" />
-        <item itemvalue="JUnit.RequestFactoryTest.syncGetResponseParse_success" />
-        <item itemvalue="JUnit.RequestFactoryTest.syncSetRequestParse_exception" />
+        <item itemvalue="JUnit.ClockTest" />
+        <item itemvalue="JUnit.ClockTest.highestClockWithEqualClocks_success" />
+        <item itemvalue="JUnit.ClockTest.highestClockWithConcurrent_success" />
+        <item itemvalue="JUnit.ClockTest.highestClock_success" />
+        <item itemvalue="JUnit.ClockTest.clockSerialization_success" />
       </list>
     </recent_temporary>
   </component>
@@ -185,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681597525877</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed failing test">
+      <created>1681597605503</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681597605503</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -193,7 +217,8 @@
     <MESSAGE value="Added VectorClock" />
     <MESSAGE value="Added database requests &amp; RequestFactory" />
     <MESSAGE value="Clock running correctly. Tests to be added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clock running correctly. Tests to be added" />
+    <MESSAGE value="Fixed failing test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed failing test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -202,11 +227,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseCondition.java</url>
           <line>27</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/varun/Runner.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
