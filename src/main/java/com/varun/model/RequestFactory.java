@@ -20,7 +20,6 @@ public class RequestFactory {
             case SET_TYPE -> parseSetRequest(splits);
             case SYNC_GET_TYPE -> parseSyncGetRequest(splits, messageQueue);
             case SYNC_SET_TYPE -> parseSyncSetRequest(splits);
-            case SYNC_GET_RESPONSE_TYPE -> parseSyncGetResponse(splits);
             default -> throw new InvalidRequestException("Invalid request type");
         };
     }
@@ -47,8 +46,7 @@ public class RequestFactory {
             throw new InvalidRequestException("SYNC GET request should be of form sync_get {key} {process_id}");
         }
         String key = splits[1];
-        int fromProcessId = Integer.parseInt(splits[2]);
-        return new SyncGetRequest(key, fromProcessId, messageQueue);
+        return new SyncGetRequest(key, messageQueue);
     }
 
     private static DatabaseRequest parseSyncSetRequest(String[] splits) throws InvalidRequestException, JsonProcessingException {
@@ -58,15 +56,6 @@ public class RequestFactory {
         String key = splits[1];
         ClockValue clockValue = ClockValue.deserialize(splits[2 ]);
         return new SyncSetRequest(key, clockValue);
-    }
-
-    private static DatabaseRequest parseSyncGetResponse(String[] splits) throws InvalidRequestException, JsonProcessingException {
-        if (splits.length != 3) {
-            throw new InvalidRequestException("SYNC GET response should be of form sync_set {key} {value} {vector_clock}");
-        }
-        String key = splits[1];
-        ClockValue clockValue = ClockValue.deserialize(splits[2]);
-        return new SyncGetResponse(key, clockValue);
     }
 
     private RequestFactory() {}

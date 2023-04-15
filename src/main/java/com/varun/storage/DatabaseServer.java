@@ -1,22 +1,23 @@
 package com.varun.storage;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.varun.exception.InvalidRequestException;
+import com.varun.model.DatabaseRequest;
+import com.varun.model.RequestFactory;
 import com.varun.util.MessageQueue;
 
 public class DatabaseServer implements Runnable {
 
     private final int processId;
 
-    private final int totalProcessCount;
-
     private final MessageQueue messageQueue;
 
     private final Database database;
 
-    public DatabaseServer(int processId, int totalProcessCount, MessageQueue messageQueue) {
+    public DatabaseServer(int processId, int totalProcessCount, MessageQueue messageQueue, GetResponseConditionUtil getResponseConditionUtil) {
         this.processId = processId;
-        this.totalProcessCount = totalProcessCount;
         this.messageQueue = messageQueue;
-        this.database = new Database(processId, totalProcessCount, messageQueue);
+        this.database = new Database(processId, totalProcessCount, messageQueue, getResponseConditionUtil);
     }
 
     @SuppressWarnings("InfiniteLoopStatement")
@@ -27,7 +28,9 @@ public class DatabaseServer implements Runnable {
             try {
                 String message = messageQueue.getMessage(this.processId);
                 System.out.printf("Received message: %s on process: %d \n", message, this.processId);
-            } catch (InterruptedException e) {
+                DatabaseRequest request = RequestFactory.parseRequest(message, messageQueue);
+                request.process(database);
+            } catch (InterruptedException | InvalidRequestException | JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
         }

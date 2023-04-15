@@ -10,7 +10,5 @@ public class RequestType {
 
     public static final String SYNC_SET_TYPE = "sync_set";
 
-    public static final String SYNC_GET_RESPONSE_TYPE = "sync_get_response";
-
     private RequestType() {}
 }

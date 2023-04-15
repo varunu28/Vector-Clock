@@ -12,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -27,13 +25,8 @@ public class RequestFactoryTest {
     @Mock
     private Database database;
 
-    @Mock
-    private ClockValue clockValue;
-
     @Before
-    public void setUp() throws JsonProcessingException {
-        when(clockValue.serialize()).thenReturn("SERIALIZED_CLOCK_VALUE");
-        doNothing().when(messageQueue).publishMessage(anyInt(), anyString());
+    public void setUp() {
     }
 
     @Test
@@ -108,7 +101,7 @@ public class RequestFactoryTest {
     public void syncGetRequestParse_success() throws InvalidRequestException, JsonProcessingException {
         // Arrange
         String message = "sync_get key 1";
-        when(database.sync(anyString())).thenReturn(Optional.of(clockValue));
+        doNothing().when(database).sync(anyString());
 
         // Act
         DatabaseRequest databaseRequest = RequestFactory.parseRequest(message, messageQueue);
@@ -116,13 +109,10 @@ public class RequestFactoryTest {
         // Assert
         assertTrue(databaseRequest instanceof SyncGetRequest);
         SyncGetRequest syncGetRequest = (SyncGetRequest) databaseRequest;
-        assertEquals(1, syncGetRequest.fromProcessId());
         assertEquals("key", syncGetRequest.key());
 
         syncGetRequest.process(database);
         verify(database, times(1)).sync(anyString());
-        verify(clockValue, times(1)).serialize();
-        verify(messageQueue, times(1)).publishMessage(anyInt(), anyString());
     }
 
     @Test
@@ -165,36 +155,6 @@ public class RequestFactoryTest {
         String noClockValue = "sync_set key";
         String noKeyValue = "sync_set clock_value";
         String noKeyOrClockValue = "sync_set";
-
-        // Assert
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noClockValue, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyValue, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyOrClockValue, messageQueue));
-    }
-
-    @Test
-    public void syncGetResponseParse_success() throws JsonProcessingException, InvalidRequestException {
-        // Arrange
-        ClockValue clockValue = new ClockValue("value", new VectorClock(1));
-        String message = "sync_get_response key " + clockValue.serialize();
-
-        // Act
-        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message, messageQueue);
-
-        // Assert
-        assertTrue(databaseRequest instanceof SyncGetResponse);
-        SyncGetResponse syncGetResponse = (SyncGetResponse) databaseRequest;
-        assertEquals("key", syncGetResponse.key());
-        assertEquals(clockValue.value(), syncGetResponse.clockValue().value());
-        assertEquals(clockValue.vectorClock(), syncGetResponse.clockValue().vectorClock());
-    }
-
-    @Test
-    public void syncGetResponseParse_exception() {
-        // Arrange
-        String noClockValue = "sync_get_response key";
-        String noKeyValue = "sync_get_response clock_value";
-        String noKeyOrClockValue = "sync_get_response";
 
         // Assert
         assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noClockValue, messageQueue));

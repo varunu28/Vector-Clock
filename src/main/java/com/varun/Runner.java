@@ -1,6 +1,7 @@
 package com.varun;
 
 import com.varun.storage.DatabaseServer;
+import com.varun.storage.GetResponseConditionUtil;
 import com.varun.util.MessageQueue;
 
 import java.io.BufferedReader;
@@ -15,8 +16,9 @@ public class Runner {
         int processCount = Integer.parseInt(args[0]);
         MessageQueue messageQueue = new MessageQueue(processCount);
         ExecutorService executorService = Executors.newFixedThreadPool(processCount);
+        GetResponseConditionUtil getResponseConditionUtil = new GetResponseConditionUtil();
         for (int i = 1; i <= processCount; i++) {
-            executorService.submit(new DatabaseServer(i, processCount, messageQueue));
+            executorService.submit(new DatabaseServer(i, processCount, messageQueue, getResponseConditionUtil));
         }
         processUserInput(messageQueue, processCount);
     }
@@ -33,7 +35,8 @@ public class Runner {
                     System.out.printf("Invalid processId. processId should be in range 1 & %d \n", processCount);
                     continue;
                 }
-                messageQueue.publishMessage(processId, message.substring(message.indexOf(' ') + 1));
+                String publishedMessage = message.substring(message.indexOf(' ') + 1);
+                messageQueue.publishMessage(processId, publishedMessage);
             } catch (NumberFormatException e) {
                 System.out.println("processId(Integer) should be provided with each command");
             }
