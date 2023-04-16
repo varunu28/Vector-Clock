@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Updated Runner to use SystemProperty &amp; updated README.md">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" afterDir="false" />
+    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Minor bug fix">
+      <change afterPath="$PROJECT_DIR$/demo/get_request.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/run_cluster.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/set_request.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +53,9 @@
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/demo" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.varun.util" />
@@ -219,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681667139201</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Minor bug fix">
+      <created>1681680651499</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681680651499</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -232,6 +244,7 @@
     <MESSAGE value="Refactoring &amp; documenting code" />
     <MESSAGE value="Added Lombok &amp; refactored some code" />
     <MESSAGE value="Updated Runner to use SystemProperty &amp; updated README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Runner to use SystemProperty &amp; updated README.md" />
+    <MESSAGE value="Minor bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor bug fix" />
   </component>
 </project>
