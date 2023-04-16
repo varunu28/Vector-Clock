@@ -106,10 +106,10 @@ public class Database {
      * @param clockValue value associated with set operation for the key
      */
     public void sync(String key, ClockValue clockValue) {
+        this.vectorClock.receive(clockValue.getVectorClock());
         if (!this.db.containsKey(key)) {
             this.db.put(key, clockValue);
         } else {
-            this.vectorClock.receive(clockValue.getVectorClock());
             this.db.put(key, new ClockValue(clockValue.getValue(), this.vectorClock.copy()));
         }
     }
