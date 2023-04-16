@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Refactoring &amp; documenting code">
+    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Added Lombok &amp; refactored some code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/clock/ClockValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/clock/ClockValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/clock/VectorClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/clock/VectorClock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/model/RequestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/model/RequestFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseConditionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseConditionUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/clock/ClockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/clock/ClockTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/model/RequestFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/model/RequestFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/RunnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/RunnerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +61,7 @@
       <recent name="com.varun" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Runner">
+  <component name="RunManager" selected="JUnit.RunnerTest">
     <configuration name="Runner" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.varun.Runner" />
       <module name="vclock" />
@@ -104,44 +99,60 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VectorClockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RunnerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.varun.clock.*" />
+          <option name="PATTERN" value="com.varun.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.varun.clock" />
-      <option name="MAIN_CLASS_NAME" value="com.varun.clock.VectorClockTest" />
+      <option name="PACKAGE_NAME" value="com.varun" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.RunnerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="java in vclock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RunnerTest.runnerWithNoSystemProperty_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.varun.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.varun" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.RunnerTest" />
+      <option name="METHOD_NAME" value="runnerWithNoSystemProperty_success" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="varun in vclock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RunnerTest.runnerWithValidSystemProperty_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/varun" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.varun.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.varun" />
+      <option name="MAIN_CLASS_NAME" value="com.varun.RunnerTest" />
+      <option name="METHOD_NAME" value="runnerWithValidSystemProperty_success" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RunnerTest" />
+        <item itemvalue="JUnit.RunnerTest.runnerWithValidSystemProperty_success" />
+        <item itemvalue="JUnit.RunnerTest.runnerWithNoSystemProperty_success" />
         <item itemvalue="JUnit.All in vclock" />
         <item itemvalue="JUnit.RequestFactoryTest" />
-        <item itemvalue="JUnit.varun in vclock" />
-        <item itemvalue="JUnit.java in vclock" />
-        <item itemvalue="JUnit.VectorClockTest" />
       </list>
     </recent_temporary>
   </component>
@@ -203,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681657101825</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Lombok &amp; refactored some code">
+      <created>1681666296573</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681666296573</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -214,6 +232,7 @@
     <MESSAGE value="Fixed failing test" />
     <MESSAGE value="Added tests for MessageQueue &amp; ClockValue" />
     <MESSAGE value="Refactoring &amp; documenting code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring &amp; documenting code" />
+    <MESSAGE value="Added Lombok &amp; refactored some code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Lombok &amp; refactored some code" />
   </component>
 </project>

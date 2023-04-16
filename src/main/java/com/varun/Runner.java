@@ -12,8 +12,7 @@ import java.util.concurrent.Executors;
 
 public class Runner {
     public static void main(String[] args) throws IllegalArgumentException, IOException {
-        performValidation(args);
-        int processCount = Integer.parseInt(args[0]);
+        int processCount = performValidation();
         MessageQueue messageQueue = new MessageQueue(processCount);
         ExecutorService executorService = Executors.newFixedThreadPool(processCount);
         GetResponseConditionUtil getResponseConditionUtil = new GetResponseConditionUtil();
@@ -45,12 +44,13 @@ public class Runner {
         }
     }
 
-    private static void performValidation(String[] args) throws IllegalArgumentException {
-        if (args.length != 1) {
+    private static int performValidation() throws IllegalArgumentException {
+        String processCount = System.getProperty("processCount");
+        if (processCount == null) {
             throw new IllegalArgumentException("Runner should called with processCount");
         }
         try {
-            Integer.parseInt(args[0]);
+            return Integer.parseInt(processCount);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Error while parsing the processCount " + e.getMessage());
         }
