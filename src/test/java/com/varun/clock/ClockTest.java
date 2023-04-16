@@ -1,8 +1,8 @@
 package com.varun.clock;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class ClockTest {
     private static final String FAKE_VALUE = "fake_value";
 
     @Test
-    public void clockSerialization_success() throws JsonProcessingException {
+    public void clockSerialization_success() throws IOException {
         // Arrange
         VectorClock vectorClock = new VectorClock(5);
         ClockValue clockValue = new ClockValue(FAKE_VALUE, vectorClock);

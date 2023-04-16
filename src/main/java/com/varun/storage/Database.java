@@ -84,7 +84,7 @@ public class Database {
                     key,
                     highestClockValues
                             .stream()
-                            .map(ClockValue::value)
+                            .map(ClockValue::getValue)
                             .collect(Collectors.toList()));
         }
     }
@@ -109,8 +109,8 @@ public class Database {
         if (!this.db.containsKey(key)) {
             this.db.put(key, clockValue);
         } else {
-            this.vectorClock.receive(clockValue.vectorClock());
-            this.db.put(key, new ClockValue(clockValue.value(), this.vectorClock.copy()));
+            this.vectorClock.receive(clockValue.getVectorClock());
+            this.db.put(key, new ClockValue(clockValue.getValue(), this.vectorClock.copy()));
         }
     }
 

@@ -4,21 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Added tests for MessageQueue &amp; ClockValue">
+    <list default="true" id="8b4ec91a-d157-4145-903c-e4ed2c8617a4" name="Changes" comment="Refactoring &amp; documenting code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/clock/ClockValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/clock/ClockValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/clock/VectorClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/clock/VectorClock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/model/RequestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/model/RequestFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/model/SyncGetRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/model/SyncGetRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/DatabaseServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/DatabaseServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseConditionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/storage/GetResponseConditionUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/varun/util/MessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/varun/util/MessageQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/clock/VectorClockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/clock/VectorClockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/clock/ClockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/clock/ClockTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/model/RequestFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/model/RequestFactoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/varun/util/MessageQueueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/varun/util/MessageQueueTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,16 +42,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
+    "git-widget-placeholder": "main",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -68,7 +66,7 @@
       <recent name="com.varun" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.varun in vclock">
+  <component name="RunManager" selected="Application.Runner">
     <configuration name="Runner" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.varun.Runner" />
       <module name="vclock" />
@@ -83,17 +81,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in vclock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="vclock" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.varun.clock.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.varun.clock" />
-      <option name="MAIN_CLASS_NAME" value="com.varun.clock.ClockTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,11 +137,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in vclock" />
+        <item itemvalue="JUnit.RequestFactoryTest" />
         <item itemvalue="JUnit.varun in vclock" />
         <item itemvalue="JUnit.java in vclock" />
-        <item itemvalue="JUnit.RequestFactoryTest" />
         <item itemvalue="JUnit.VectorClockTest" />
-        <item itemvalue="JUnit.ClockTest" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681599313386</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactoring &amp; documenting code">
+      <created>1681657101825</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681657101825</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -215,6 +213,7 @@
     <MESSAGE value="Clock running correctly. Tests to be added" />
     <MESSAGE value="Fixed failing test" />
     <MESSAGE value="Added tests for MessageQueue &amp; ClockValue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tests for MessageQueue &amp; ClockValue" />
+    <MESSAGE value="Refactoring &amp; documenting code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring &amp; documenting code" />
   </component>
 </project>

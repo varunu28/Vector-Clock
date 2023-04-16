@@ -19,9 +19,9 @@ public class GetResponseConditionUtil {
     /**
      * Creates & persists a new {@link GetResponseCondition}
      *
-     * @param key            key for the condition
+     * @param key key for the condition
      * @param selfClockValue ClockValue associated with process that is creating the condition
-     * @param processCount   total number of processes participating in the condition
+     * @param processCount total number of processes participating in the condition
      */
     public void initializeCondition(String key, ClockValue selfClockValue, int processCount) {
         GetResponseCondition getResponseCondition = new GetResponseCondition(processCount, selfClockValue);
@@ -31,7 +31,7 @@ public class GetResponseConditionUtil {
     /**
      * Update the condition associated with a key
      *
-     * @param key        key for which the condition is updated
+     * @param key key for which the condition is updated
      * @param clockValue clock value associated with given condition update
      */
     public void updateCondition(String key, ClockValue clockValue) {

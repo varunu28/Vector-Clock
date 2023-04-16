@@ -2,7 +2,11 @@ package com.varun.clock;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +14,14 @@ import java.util.List;
  * ClockValue stores a pair of value associated with a database key & VectorClock at which the
  * record was persisted.
  */
-public record ClockValue(String value, VectorClock vectorClock) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ClockValue {
+
+    private String value;
+
+    private VectorClock vectorClock;
 
     /**
      * Deserializes a string representation of ClockValue to a ClockValue instance.
@@ -19,7 +30,7 @@ public record ClockValue(String value, VectorClock vectorClock) {
      * @return ClockValue instance
      * @throws JsonProcessingException if deserialization fails
      */
-    public static ClockValue deserialize(String json) throws JsonProcessingException {
+    public static ClockValue deserialize(String json) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, ClockValue.class);
     }
@@ -38,8 +49,8 @@ public record ClockValue(String value, VectorClock vectorClock) {
                 if (highestClockValues.isEmpty()) {
                     highestClockValues.add(clockValue);
                 } else {
-                    VectorClock currVectorClock = clockValue.vectorClock();
-                    VectorClock highestVectorClock = highestClockValues.get(0).vectorClock();
+                    VectorClock currVectorClock = clockValue.getVectorClock();
+                    VectorClock highestVectorClock = highestClockValues.get(0).getVectorClock();
                     if (currVectorClock.isConcurrent(highestVectorClock) ||
                             currVectorClock.equals(highestVectorClock)) {
                         highestClockValues.add(clockValue);

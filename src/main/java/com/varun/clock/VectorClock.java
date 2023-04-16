@@ -1,26 +1,24 @@
 package com.varun.clock;
 
-import java.util.Arrays;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Class representing a vector clock which will be associated with storage operations.
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class VectorClock {
 
     private int totalProcessCount;
 
     private int[] clock;
 
-    public VectorClock() {}
-
     public VectorClock(int totalProcessCount) {
         this.totalProcessCount = totalProcessCount;
         this.clock = new int[totalProcessCount];
-    }
-
-    public VectorClock(int totalProcessCount, int[] clock) {
-        this.totalProcessCount = totalProcessCount;
-        this.clock = clock;
     }
 
     /**
@@ -66,31 +64,5 @@ public class VectorClock {
             higherFound = this.clock[i] > otherClock[i] || higherFound;
         }
         return smallerFound && higherFound;
-    }
-
-    public int getTotalProcessCount() {
-        return totalProcessCount;
-    }
-
-    public int[] getClock() {
-        return Arrays.copyOf(this.clock, this.totalProcessCount);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        VectorClock that = (VectorClock) o;
-
-        if (totalProcessCount != that.totalProcessCount) return false;
-        return Arrays.equals(clock, that.clock);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = totalProcessCount;
-        result = 31 * result + Arrays.hashCode(clock);
-        return result;
     }
 }

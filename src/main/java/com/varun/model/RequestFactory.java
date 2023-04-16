@@ -4,17 +4,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.varun.clock.ClockValue;
 import com.varun.exception.InvalidRequestException;
 
+import java.io.IOException;
+
 import static com.varun.model.RequestType.*;
 
 public class RequestFactory {
 
     /**
-     * @param message input given by user in string representation
+     * @param message      input given by user in string representation
      * @return DatabaseRequest concrete implementation of DatabaseRequest interface
      * @throws InvalidRequestException if validation for input fails
      * @throws JsonProcessingException if deserialization for ClockValue fails
      */
-    public static DatabaseRequest parseRequest(String message) throws InvalidRequestException, JsonProcessingException {
+    public static DatabaseRequest parseRequest(String message) throws InvalidRequestException, IOException {
         String[] splits = message.split("\\s+");
         if (splits.length == 0) {
             throw new InvalidRequestException("Request should contain a request type");
@@ -54,7 +56,7 @@ public class RequestFactory {
         return new SyncGetRequest(key);
     }
 
-    private static DatabaseRequest parseSyncSetRequest(String[] splits) throws InvalidRequestException, JsonProcessingException {
+    private static DatabaseRequest parseSyncSetRequest(String[] splits) throws InvalidRequestException, IOException {
         if (splits.length != 3) {
             throw new InvalidRequestException("SYNC SET request should be of form sync_set {key} {vector_clock}");
         }

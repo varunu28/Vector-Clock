@@ -1,6 +1,5 @@
 package com.varun.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.varun.clock.ClockValue;
 import com.varun.clock.VectorClock;
 import com.varun.exception.InvalidRequestException;
@@ -10,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,7 +32,7 @@ public class RequestFactoryTest {
     }
 
     @Test
-    public void getRequestParse_success() throws InvalidRequestException, JsonProcessingException {
+    public void getRequestParse_success() throws InvalidRequestException, IOException {
         // Arrange
         String request = "get key";
         doNothing().when(database).get(anyString());
@@ -60,7 +61,7 @@ public class RequestFactoryTest {
     }
 
     @Test
-    public void setRequestParse_success() throws InvalidRequestException, JsonProcessingException {
+    public void setRequestParse_success() throws InvalidRequestException, IOException {
         // Arrange
         String message = "set key value";
         doNothing().when(database).set(anyString(), anyString());
@@ -94,7 +95,7 @@ public class RequestFactoryTest {
     }
 
     @Test
-    public void syncGetRequestParse_success() throws InvalidRequestException, JsonProcessingException {
+    public void syncGetRequestParse_success() throws InvalidRequestException, IOException {
         // Arrange
         String message = "sync_get key 1";
         doNothing().when(database).sync(anyString());
@@ -123,7 +124,7 @@ public class RequestFactoryTest {
     }
 
     @Test
-    public void syncSetRequestParse_success() throws JsonProcessingException, InvalidRequestException {
+    public void syncSetRequestParse_success() throws IOException, InvalidRequestException {
         // Arrange
         ClockValue clockValue = new ClockValue("value", new VectorClock(1));
         String message = "sync_set key " + clockValue.serialize();
@@ -136,8 +137,8 @@ public class RequestFactoryTest {
         assertTrue(databaseRequest instanceof SyncSetRequest);
         SyncSetRequest syncSetRequest = (SyncSetRequest)  databaseRequest;
         assertEquals("key", syncSetRequest.key());
-        assertEquals(clockValue.value(), syncSetRequest.clockValue().value());
-        assertEquals(clockValue.vectorClock(), syncSetRequest.clockValue().vectorClock());
+        assertEquals(clockValue.getValue(), syncSetRequest.clockValue().getValue());
+        assertEquals(clockValue.getVectorClock(), syncSetRequest.clockValue().getVectorClock());
 
         syncSetRequest.process(database);
         verify(database, times(1)).sync(anyString(), any(ClockValue.class));
