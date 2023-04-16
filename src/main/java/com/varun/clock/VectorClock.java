@@ -2,6 +2,9 @@ package com.varun.clock;
 
 import java.util.Arrays;
 
+/**
+ * Class representing a vector clock which will be associated with storage operations.
+ */
 public class VectorClock {
 
     private int totalProcessCount;
@@ -20,14 +23,27 @@ public class VectorClock {
         this.clock = clock;
     }
 
-    public static VectorClock copy(VectorClock otherVectorClock) {
-        return new VectorClock(otherVectorClock.getTotalProcessCount(), otherVectorClock.getClock());
+    /**
+     * Method to create a deep copy of a VectorClock instance
+     *
+     * @return copy of current VectorClock instance
+     */
+    public VectorClock copy() {
+        return new VectorClock(this.getTotalProcessCount(), this.getClock());
     }
 
+    /**
+     * Increments the monotonically increasing clock associated with the processId
+     *
+     * @param processId process for which the clock needs to be incremented
+     */
     public void tick(int processId) {
         this.clock[processId - 1]++;
     }
 
+    /**
+     * @param otherVectorClock Increment
+     */
     public void receive(VectorClock otherVectorClock) {
         int[] otherClock = otherVectorClock.getClock();
         for (int i = 0; i < totalProcessCount; i++) {
@@ -35,16 +51,12 @@ public class VectorClock {
         }
     }
 
-    public static VectorClock merge(VectorClock vectorClockOne, VectorClock vectorClockTwo) {
-        int[] mergedClock = new int[vectorClockOne.getTotalProcessCount()];
-        int[] clockOne = vectorClockOne.getClock();
-        int[] clockTwo = vectorClockTwo.getClock();
-        for (int i = 0; i < mergedClock.length; i++) {
-            mergedClock[i] = Math.max(clockTwo[i], clockOne[i]);
-        }
-        return new VectorClock(vectorClockOne.getTotalProcessCount(), mergedClock);
-    }
-
+    /**
+     * Check if this instance of VectorClock is concurrent with another VectorClock instance
+     *
+     * @param otherVectorClock VectorClock instance with which concurrency needs to be checked
+     * @return boolean returns a true/false based on if clock is concurrent or not.
+     */
     public boolean isConcurrent(VectorClock otherVectorClock) {
         boolean smallerFound = false;
         boolean higherFound = false;

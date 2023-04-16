@@ -5,7 +5,6 @@ import com.varun.clock.ClockValue;
 import com.varun.clock.VectorClock;
 import com.varun.exception.InvalidRequestException;
 import com.varun.storage.Database;
-import com.varun.util.MessageQueue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,9 +19,6 @@ import static org.mockito.Mockito.*;
 public class RequestFactoryTest {
 
     @Mock
-    private MessageQueue messageQueue;
-
-    @Mock
     private Database database;
 
     @Before
@@ -31,7 +27,7 @@ public class RequestFactoryTest {
 
     @Test
     public void parseRequest_emptyString() {
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest("", messageQueue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(""));
     }
 
     @Test
@@ -41,7 +37,7 @@ public class RequestFactoryTest {
         doNothing().when(database).get(anyString());
 
         // Act
-        DatabaseRequest databaseRequest = RequestFactory.parseRequest(request, messageQueue);
+        DatabaseRequest databaseRequest = RequestFactory.parseRequest(request);
 
         // Assert
         assertTrue(databaseRequest instanceof GetRequest);
@@ -59,8 +55,8 @@ public class RequestFactoryTest {
         String requestMoreThanOneParam = "get key key";
 
         // Act
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestNoValue, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestMoreThanOneParam, messageQueue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestNoValue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestMoreThanOneParam));
     }
 
     @Test
@@ -70,7 +66,7 @@ public class RequestFactoryTest {
         doNothing().when(database).set(anyString(), anyString());
 
         // Act
-        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message, messageQueue);
+        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message);
 
         // Assert
         assertTrue(databaseRequest instanceof SetRequest);
@@ -91,10 +87,10 @@ public class RequestFactoryTest {
         String requestMoreThanTwoParam = "set key value extra";
 
         // Act
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestNoValue, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestNoKey, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestParam, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestMoreThanTwoParam, messageQueue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestNoValue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestNoKey));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestParam));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(requestMoreThanTwoParam));
     }
 
     @Test
@@ -104,7 +100,7 @@ public class RequestFactoryTest {
         doNothing().when(database).sync(anyString());
 
         // Act
-        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message, messageQueue);
+        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message);
 
         // Assert
         assertTrue(databaseRequest instanceof SyncGetRequest);
@@ -122,8 +118,8 @@ public class RequestFactoryTest {
         String noKeyAndProcessId = "sync_get";
 
         // Assert
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noProcessId, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyAndProcessId, messageQueue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noProcessId));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyAndProcessId));
     }
 
     @Test
@@ -134,7 +130,7 @@ public class RequestFactoryTest {
         doNothing().when(database).sync(anyString(), any(ClockValue.class));
 
         // Act
-        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message, messageQueue);
+        DatabaseRequest databaseRequest = RequestFactory.parseRequest(message);
 
         // Assert
         assertTrue(databaseRequest instanceof SyncSetRequest);
@@ -155,8 +151,8 @@ public class RequestFactoryTest {
         String noKeyOrClockValue = "sync_set";
 
         // Assert
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noClockValue, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyValue, messageQueue));
-        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyOrClockValue, messageQueue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noClockValue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyValue));
+        assertThrows(InvalidRequestException.class, () -> RequestFactory.parseRequest(noKeyOrClockValue));
     }
 }

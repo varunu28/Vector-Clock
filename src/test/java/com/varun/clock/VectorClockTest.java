@@ -25,7 +25,7 @@ public class VectorClockTest {
         vectorClock.tick(1);
 
         // Act
-        VectorClock otherVectorClock = VectorClock.copy(vectorClock);
+        VectorClock otherVectorClock = vectorClock.copy();
 
         // Assert
         assertArrayEquals(otherVectorClock.getClock(), vectorClock.getClock());
@@ -42,20 +42,6 @@ public class VectorClockTest {
 
         // Assert
         assertArrayEquals(new int[]{1, 2, 3}, vectorClockOne.getClock());
-    }
-
-    @Test
-    public void merge_success() {
-        // Arrange
-        VectorClock vectorClockOne = new VectorClock(3, new int[]{3, 2, 1});
-        VectorClock vectorClockTwo = new VectorClock(3, new int[]{1, 2, 3});
-
-        // Act
-        VectorClock mergedClock = VectorClock.merge(vectorClockOne, vectorClockTwo);
-
-        // Assert
-        assertEquals(3, mergedClock.getTotalProcessCount());
-        assertArrayEquals(new int[]{3, 2, 3}, mergedClock.getClock());
     }
 
     @Test

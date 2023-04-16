@@ -39,6 +39,8 @@ public class Runner {
                 messageQueue.publishMessage(processId, publishedMessage);
             } catch (NumberFormatException e) {
                 System.out.println("processId(Integer) should be provided with each command");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }

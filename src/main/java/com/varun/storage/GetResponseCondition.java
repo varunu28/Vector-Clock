@@ -8,6 +8,10 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * A class representing the condition associated with a get request processing. Condition is updated as part of
+ * processing {@link com.varun.model.SyncGetRequest}
+ */
 public class GetResponseCondition {
     private final Lock lock;
     private final Condition condition;
@@ -22,6 +26,11 @@ public class GetResponseCondition {
         this.clockValues.add(selfClockValue);
     }
 
+    /**
+     * Checks if the condition is fulfilled or else blocks the current thread.
+     *
+     * @throws InterruptedException If the current thread is interrupted
+     */
     public void isConditionMet() throws InterruptedException {
         lock.lock();
         try {
@@ -34,6 +43,11 @@ public class GetResponseCondition {
         System.out.println("Condition fulfilled");
     }
 
+    /**
+     * Updates the condition by adding a clock value
+     *
+     * @param clockValue clock value associated with processing a {@link com.varun.model.SyncGetRequest}
+     */
     public void addClockValue(ClockValue clockValue) {
         lock.lock();
         try {

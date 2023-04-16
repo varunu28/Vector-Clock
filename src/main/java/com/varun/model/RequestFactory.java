@@ -3,13 +3,18 @@ package com.varun.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.varun.clock.ClockValue;
 import com.varun.exception.InvalidRequestException;
-import com.varun.util.MessageQueue;
 
 import static com.varun.model.RequestType.*;
 
 public class RequestFactory {
 
-    public static DatabaseRequest parseRequest(String message, MessageQueue messageQueue) throws InvalidRequestException, JsonProcessingException {
+    /**
+     * @param message input given by user in string representation
+     * @return DatabaseRequest concrete implementation of DatabaseRequest interface
+     * @throws InvalidRequestException if validation for input fails
+     * @throws JsonProcessingException if deserialization for ClockValue fails
+     */
+    public static DatabaseRequest parseRequest(String message) throws InvalidRequestException, JsonProcessingException {
         String[] splits = message.split("\\s+");
         if (splits.length == 0) {
             throw new InvalidRequestException("Request should contain a request type");
@@ -18,7 +23,7 @@ public class RequestFactory {
         return switch (requestType) {
             case GET_TYPE -> parseGetRequest(splits);
             case SET_TYPE -> parseSetRequest(splits);
-            case SYNC_GET_TYPE -> parseSyncGetRequest(splits, messageQueue);
+            case SYNC_GET_TYPE -> parseSyncGetRequest(splits);
             case SYNC_SET_TYPE -> parseSyncSetRequest(splits);
             default -> throw new InvalidRequestException("Invalid request type");
         };
@@ -41,12 +46,12 @@ public class RequestFactory {
         return new SetRequest(key, value);
     }
 
-    private static DatabaseRequest parseSyncGetRequest(String[] splits, MessageQueue messageQueue) throws InvalidRequestException {
+    private static DatabaseRequest parseSyncGetRequest(String[] splits) throws InvalidRequestException {
         if (splits.length != 3) {
             throw new InvalidRequestException("SYNC GET request should be of form sync_get {key} {process_id}");
         }
         String key = splits[1];
-        return new SyncGetRequest(key, messageQueue);
+        return new SyncGetRequest(key);
     }
 
     private static DatabaseRequest parseSyncSetRequest(String[] splits) throws InvalidRequestException, JsonProcessingException {

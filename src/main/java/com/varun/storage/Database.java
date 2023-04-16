@@ -36,9 +36,15 @@ public class Database {
         this.getResponseConditionUtil = getResponseConditionUtil;
     }
 
+    /**
+     * Persists a database record for given key & value. Also syncs with other processes for the database operation.
+     *
+     * @param key for database record
+     * @param val for database record
+     */
     public void set(String key, String val) {
         this.vectorClock.tick(this.processId);
-        this.db.put(key, new ClockValue(val, VectorClock.copy(this.vectorClock)));
+        this.db.put(key, new ClockValue(val, this.vectorClock.copy()));
         try {
             String message = buildSyncSetMessage(key);
             dispatch(message);
@@ -47,6 +53,11 @@ public class Database {
         }
     }
 
+    /**
+     * Get the value associated with a key. Sync with other processes to find the latest value
+     *
+     * @param key for which the value needs to be retrieved
+     */
     public void get(String key) {
         // Initialize condition
         ClockValue selfClockValue = this.db.getOrDefault(key, null);
@@ -78,17 +89,28 @@ public class Database {
         }
     }
 
+    /**
+     * Respond to sync get request for a key
+     *
+     * @param key for which this process needs to respond for {@link com.varun.model.SyncGetRequest}
+     */
     public void sync(String key) {
         ClockValue clockValue = this.db.getOrDefault(key, null);
         this.getResponseConditionUtil.updateCondition(key, clockValue);
     }
 
+    /**
+     * Respond to sync set request for a key
+     *
+     * @param key        key for which this process needs to respond for {@link com.varun.model.SyncSetRequest}
+     * @param clockValue value associated with set operation for the key
+     */
     public void sync(String key, ClockValue clockValue) {
         if (!this.db.containsKey(key)) {
             this.db.put(key, clockValue);
         } else {
-            VectorClock mergedClock = VectorClock.merge(this.vectorClock, clockValue.vectorClock());
-            this.db.put(key, new ClockValue(clockValue.value(), mergedClock));
+            this.vectorClock.receive(clockValue.vectorClock());
+            this.db.put(key, new ClockValue(clockValue.value(), this.vectorClock.copy()));
         }
     }
 

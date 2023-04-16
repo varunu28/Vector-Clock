@@ -22,7 +22,7 @@ public class MessageQueueTest {
     public void messageQueue_success() throws Exception {
         messageQueue.publishMessage(1, FAKE_MESSAGE);
 
-        String message = messageQueue.getMessage(1);
+        String message = messageQueue.consumeMessage(1);
         assertEquals(message, FAKE_MESSAGE);
     }
 
@@ -30,7 +30,7 @@ public class MessageQueueTest {
     public void threadBlockedIfNoMessage_success() throws InterruptedException {
         Thread consumerThread = new Thread(() -> {
             try {
-                messageQueue.getMessage(1);
+                messageQueue.consumeMessage(1);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -44,7 +44,7 @@ public class MessageQueueTest {
 
     @Test
     public void outOfBoundProcessMessageConsumption_exception() {
-        Exception exception = assertThrows(Exception.class, () -> messageQueue.getMessage(10));
+        Exception exception = assertThrows(Exception.class, () -> messageQueue.consumeMessage(10));
         assertTrue(exception.getMessage().contains("Message queue does not contain processId: "));
     }
 
