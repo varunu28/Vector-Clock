@@ -1,4 +1,4 @@
-# Vector-Clock
+# Vector-Clock :alarm_clock:
 An implementation of Vector Clock in Java. Covered in the blog post [Vector Clocks: So what time is it?](https://distributed-computing-musings.com/2023/04/vector-clocks-so-what-time-is-it/)
 
 ## Running the project
